@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom'; // HashRouter is correct for GitHub Pages fix
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'; // Import useLocation
 import Home from './components/Home/Home.jsx';
 import Team from './components/Team/Team.jsx';
 import Sports from './components/Sports/Sports.jsx';
@@ -19,8 +19,6 @@ function AppContent() {
   const location = useLocation();
 
   // Determine if the current path is the home page ("/")
-  // Note: HashRouter handles paths slightly differently, but location.pathname 
-  // still works for determining the current route component is being displayed.
   const isHomePage = location.pathname === '/';
 
   return (
@@ -44,7 +42,7 @@ function AppContent() {
 
 function App() {
   return (
-    // We use HashRouter here to fix the 404 issue on GitHub Pages
+    // The Router must wrap any component that uses useLocation
     <Router>
       <AppContent />
     </Router>
