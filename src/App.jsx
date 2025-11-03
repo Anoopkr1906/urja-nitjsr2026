@@ -2,16 +2,16 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom'; // HashRouter is correct for GitHub Pages fix
-import Home from '../components/Home/Home.jsx';
-import Team from '../components/Team/Team.jsx';
-import Sports from '../components/Sports/Sports.jsx';
-import Pool from '../components/Pool/Pool.jsx';
-import PointsTable from '../components/PointsTable/PointsTable.jsx';
-import Navbar from '../components/Navbar/Navbar.jsx';
-import LeaderBoard from '../components/LeaderBoard/LeaderBoard.jsx';
-import '../App.css';
-import Gallery from '../components/Gallery/Gallery.jsx';
-import Footer from '../components/Footer/Footer.jsx';
+import Home from './components/Home/Home.jsx';
+import Team from './components/Team/Team.jsx';
+import Sports from './components/Sports/Sports.jsx';
+import Pool from './components/Pool/Pool.jsx';
+import PointsTable from './components/PointsTable/PointsTable.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
+import LeaderBoard from './components/LeaderBoard/LeaderBoard.jsx';
+import './App.css';
+import Gallery from './components/Gallery/Gallery.jsx';
+import Footer from './components/Footer/Footer.jsx';
 
 // Create a new component to handle conditional rendering
 function AppContent() {
