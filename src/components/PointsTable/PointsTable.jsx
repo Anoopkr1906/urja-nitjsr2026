@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './PointsTable.css';
 
+// NOTE: Ensure your actual data files are in place in your project's file system 
+// (e.g., ./sports/lawn-tennis/boys/pool-a.jsx). 
+// The mock data function and constants have been removed to use your dynamic imports.
+
 const sportsDataMap = {
     'Athletics': {
         genders: ['Boys', 'Girls'],
@@ -69,13 +73,41 @@ const formatString = (str) => {
 
 function ScoreboardTable({ data }) {
     if (!data || !data.headings || !data.data) return null;
-    const pointsColumnIndex = data.headings.findIndex(heading => heading.toLowerCase().includes('pts') || heading.toLowerCase().includes('points'));
 
+    // Find the index of the 'Points' column for sorting
+    const pointsColumnIndex = data.headings.findIndex(heading =>
+        heading.toLowerCase().includes('pts') || heading.toLowerCase().includes('points')
+    );
+
+    // Find the index of the 'Position' column for overriding
+    const positionColumnIndex = data.headings.findIndex(heading =>
+        heading.toLowerCase().includes('position') || heading.toLowerCase().includes('pos')
+    );
+
+    // Sort the data array by Points (descending)
     const sortedData = [...data.data].sort((a, b) => {
         if (pointsColumnIndex !== -1) {
             const pointsA = parseFloat(a[pointsColumnIndex]);
             const pointsB = parseFloat(b[pointsColumnIndex]);
-            return pointsB - pointsA;
+
+            // Primary sort: Points (descending)
+            if (pointsB !== pointsA) {
+                return pointsB - pointsA;
+            }
+
+            // Secondary sort (Tie-breaker): Team Name
+            // === START FIX FOR TypeError: a[1].localeCompare ===
+            const teamA = a[1];
+            const teamB = b[1];
+
+            // CRITICAL CHECK: Ensure both team names exist and are strings before comparison
+            if (typeof teamA === 'string' && typeof teamB === 'string') {
+                return teamA.localeCompare(teamB);
+            }
+
+            // If team names are invalid (not strings), don't crash, just maintain current order (return 0)
+            return 0;
+            // === END FIX FOR TypeError: a[1].localeCompare ===
         }
         return 0;
     });
@@ -93,9 +125,18 @@ function ScoreboardTable({ data }) {
                 <tbody>
                     {sortedData.map((row, rowIndex) => (
                         <tr key={rowIndex}>
-                            {row.map((cell, cellIndex) => (
-                                <td key={cellIndex}>{cell}</td>
-                            ))}
+                            {row.map((cell, cellIndex) => {
+                                let displayCell = cell;
+
+                                // FIX: Override the Position column with the calculated rank
+                                if (cellIndex === positionColumnIndex) {
+                                    displayCell = rowIndex + 1;
+                                }
+
+                                return (
+                                    <td key={cellIndex}>{displayCell}</td>
+                                );
+                            })}
                         </tr>
                     ))}
                 </tbody>
@@ -129,13 +170,7 @@ function MatchesList({ matches }) {
                             </div>
                         )}
                     </div>
-                    {/* {match.winner !== 'Upcoming Match' && (
-                        <p className="match-result">
-                            {match.winner} won by {match.winBy}
-                        </p>
-                    )} */}
                     <p className="match-venue">Venue: {match.venue}</p>
-                    {/* <a href={match.scorecardUrl} className="scorecard-link">Scorecard</a> */}
                 </div>
             ))}
         </div>
@@ -168,7 +203,6 @@ function Dropdown({ label, options, value, onChange }) {
     const displayValue = value ? formatString(value) : (options.length > 0 ? formatString(options[0]) : label);
 
     return (
-        // --- CHANGE: Add active-dropdown class when open ---
         <div className={`dropdown-wrapper ${isOpen ? 'active-dropdown' : ''}`} ref={dropdownRef}>
             <label>{label}:</label>
             <div className={`custom-dropdown-button ${isOpen ? 'open' : ''}`} onClick={toggleOpen}>
@@ -208,7 +242,8 @@ function KnockoutBracket({ data }) {
                                     </div>
                                 )}
                                 {match.team2 && (
-                                    <div className="bracket-team">
+                                    <div className
+                                        className="bracket-team">
                                         <span className="team-name">{match.team2}</span>
                                         <span className="team-score">{match.score2}</span>
                                     </div>
@@ -231,7 +266,6 @@ function PointsTable() {
     const [selectedStage, setSelectedStage] = useState('Group Stage');
     const [currentData, setCurrentData] = useState(null);
 
-    // NEW STATE FOR MOBILE DROPDOWN:
     const [isMobileSportDropdownOpen, setIsMobileSportDropdownOpen] = useState(false);
     const mobileDropdownRef = useRef(null);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -239,17 +273,15 @@ function PointsTable() {
 
     const sportsList = [
         { name: 'Athletics', emoji: '🏃' },
-        
+
         { name: 'Chess', emoji: '♟️' },
         { name: 'Cricket', emoji: '🏏' },
         { name: 'Football', emoji: '⚽' },
-        
+
         { name: 'Lawn Tennis', emoji: '🎾' },
         { name: 'Table Tennis', emoji: '🏓' },
         { name: 'Volleyball', emoji: '🏐' }
     ];
-
-    // --- State Management and Data Fetching Logic ---
 
     // Effect to handle dynamic pool selection when sport/gender/stage changes
     useEffect(() => {
@@ -272,33 +304,49 @@ function PointsTable() {
         const importData = async () => {
             setCurrentData(null);
 
-            if (!selectedSport || !selectedGender || (selectedStage === 'Group Stage' && !selectedPool)) {
+            if (!selectedSport || !selectedGender || (selectedStage === 'Group Stage' && !selectedPool && selectedSport !== 'Athletics')) {
                 return;
             }
 
             try {
                 const sportFolderPath = selectedSport.toLowerCase().replace(' ', '-');
                 const genderFolderPath = selectedGender.toLowerCase().replace(' ', '-');
-                let module;
-                let dataKey;
+                let module = null;
+                let dataKey = '';
 
                 if (selectedSport === 'Athletics') {
-                    // For Athletics, import from events.js and find the specific event
-                    module = await import(`./sports/${sportFolderPath}/${genderFolderPath}/events.jsx`);
+                    module = await import(`./sports/${sportFolderPath}/${genderFolderPath}/events.jsx`).catch(e => {
+                        console.error("Athletics import failed:", e);
+                        return null;
+                    });
                     const eventKey = 'athletics' + selectedPool.replace(/\s+/g, '').replace('m', 'm');
                     dataKey = eventKey;
                 } else if (selectedStage === 'Group Stage') {
                     const poolFolderPath = selectedPool.toLowerCase().replace(' ', '-');
-                    module = await import(`./sports/${sportFolderPath}/${genderFolderPath}/${poolFolderPath}.jsx`);
-                    dataKey = Object.keys(module)[0];
+                    module = await import(`./sports/${sportFolderPath}/${genderFolderPath}/${poolFolderPath}.jsx`).catch(e => {
+                        console.error("Group Stage import failed:", e);
+                        return null;
+                    });
+                    dataKey = module ? Object.keys(module)[0] : '';
                 } else { // Knockout Stage
-                    module = await import(`./sports/${sportFolderPath}/${genderFolderPath}/knockout.jsx`);
-                    dataKey = Object.keys(module)[0];
+                    module = await import(`./sports/${sportFolderPath}/${genderFolderPath}/knockout.jsx`).catch(e => {
+                        console.error("Knockout import failed:", e);
+                        return null;
+                    });
+                    dataKey = module ? Object.keys(module)[0] : '';
                 }
-                setCurrentData(module[dataKey]);
+
+                // Final check: If the module loaded AND the expected key exists
+                if (module && module[dataKey]) {
+                    setCurrentData(module[dataKey]);
+                } else {
+                    console.warn(`Data not found or key ${dataKey} missing for ${selectedSport}.`);
+                    setCurrentData(null);
+                }
 
             } catch (error) {
-                console.error(`Failed to load data for ${selectedSport} - ${selectedGender} - ${selectedStage} (${selectedStage === 'Group Stage' ? selectedPool : 'knockout'}):`, error);
+                // This top-level catch is for any synchronous errors or unexpected promise rejections.
+                console.error(`Unexpected crash during data import for ${selectedSport}:`, error);
                 setCurrentData(null);
             }
         };
@@ -331,12 +379,19 @@ function PointsTable() {
     const handleSportChange = (event) => {
         const newSport = event.target.value;
         setSelectedSport(newSport);
-        setIsMobileSportDropdownOpen(false); // Close dropdown after selection
+        setIsMobileSportDropdownOpen(false);
 
         const genders = sportsDataMap[newSport]?.genders || [];
-        if (genders.length > 0) {
-            setSelectedGender(genders[0]);
-        }
+        const newGender = genders.length > 0 ? genders[0] : selectedGender;
+        setSelectedGender(newGender);
+
+        // FIX: Explicitly reset Pool/Event to the first valid one for the new sport
+        const pools = sportsDataMap[newSport]?.pools[newGender] || [];
+        setSelectedPool(pools.length > 0 ? pools[0] : '');
+
+        // FIX: Explicitly reset Stage
+        const stages = sportsDataMap[newSport]?.stages || [];
+        setSelectedStage(stages.length > 0 ? stages[0] : 'Group Stage');
     };
 
     const handleGenderChange = (event) => {
@@ -388,7 +443,6 @@ function PointsTable() {
                             {sportsList.map((sport) => (
                                 <li
                                     key={sport.name}
-                                    // Simulate the event object expected by handleSportChange
                                     onClick={() => handleSportChange({ target: { value: sport.name } })}
                                     className={sport.name === selectedSport ? 'selected' : ''}
                                 >

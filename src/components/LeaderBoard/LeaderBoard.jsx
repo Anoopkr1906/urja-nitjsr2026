@@ -5,43 +5,43 @@ import './LeaderBoard.css';
 const teamsData = [
   {
     name: 'PIE',
-    totalPoints: 255,
-    breakdown: { 'Athletics': 25, 'Badminton': 30, 'Basketball': 20, 'Chess': 15, 'Cricket': 35, 'Football': 40, 'Handball': 25, 'Table Tennis': 20, 'Volleyball': 25 }
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
   },
   {
     name: 'CSE',
-    totalPoints: 300,
-    breakdown: { 'Athletics': 35, 'Badminton': 35, 'Basketball': 30, 'Chess': 25, 'Cricket': 40, 'Football': 45, 'Handball': 30, 'Table Tennis': 15, 'Volleyball': 20 }
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
   },
   {
     name: 'ECE',
-    totalPoints: 215,
-    breakdown: { 'Athletics': 20, 'Badminton': 25, 'Basketball': 25, 'Chess': 20, 'Cricket': 30, 'Football': 25, 'Handball': 20, 'Table Tennis': 20, 'Volleyball': 15 }
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
   },
   {
-    name: 'CIVIL',
-    totalPoints: 190,
-    breakdown: { 'Athletics': 9, 'Badminton': 0, 'Basketball': 15, 'Chess': 0, 'Cricket': 0, 'Football': 20, 'Handball': 15, 'Table Tennis': 11, 'Volleyball': 120 }
+    name: 'CE',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
   },
   {
-    name: 'META',
-    totalPoints: 180,
-    breakdown: { 'Athletics': 15, 'Badminton': 20, 'Basketball': 15, 'Chess': 10, 'Cricket': 25, 'Football': 30, 'Handball': 20, 'Table Tennis': 15, 'Volleyball': 15 }
+    name: 'MME',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
   },
   {
-    name: 'MECH',
-    totalPoints: 165,
-    breakdown: { 'Athletics': 10, 'Badminton': 15, 'Basketball': 20, 'Chess': 15, 'Cricket': 20, 'Football': 25, 'Handball': 15, 'Table Tennis': 10, 'Volleyball': 15 }
+    name: 'ME',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
   },
   {
     name: 'EE',
-    totalPoints: 170,
-    breakdown: { 'Athletics': 20, 'Badminton': 10, 'Basketball': 10, 'Chess': 20, 'Cricket': 15, 'Football': 20, 'Handball': 25, 'Table Tennis': 15, 'Volleyball': 15 }
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
   },
   {
     name: 'ECM',
-    totalPoints: 175,
-    breakdown: { 'Athletics': 15, 'Badminton': 20, 'Basketball': 15, 'Chess': 15, 'Cricket': 20, 'Football': 30, 'Handball': 10, 'Table Tennis': 10, 'Volleyball': 15 }
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
   }
 ];
 // ---------------------------
@@ -174,7 +174,7 @@ const LeaderBoard = () => {
 
         <div className="scoring-rules">
           <div className="scoring-title">SCORING SYSTEM</div>
-          <div>1st Place: 5 points • 2nd Place: 3 points • 3rd Place: 1 point</div>
+          <div>1st Place: 10 points • 2nd Place: 7 points • 3rd Place: 5 point</div>
           <div className="scoring-subtitle">
             Team trophies awarded based on total points from all events
           </div>

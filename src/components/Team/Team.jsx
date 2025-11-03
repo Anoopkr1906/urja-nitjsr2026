@@ -12,24 +12,18 @@ const supercoreTeamData = [
     {
         post: 'Joint Sports Secretary',
         name: 'Mrinal Ayush Raj',
-        regNo: '2022UGME052',
+        regNo: '2023UGME052',
         image: 'mrinal.jpg'
     },
     {
         post: 'Joint Sports Secretary',
         name: 'Sunita Diggi',
-        regNo: '2022UGCE052',
+        regNo: '2023UGCE052',
         image: 'sunita.jpg'
     },
     {
-        post: 'Sports Team Coordinator',
-        name: 'Abhishek Bhoutkar',
-        regNo: '2022UGPI037',
-        image: 'bhotkar.jpg'
-    },
-    {
         post: 'General Secretary',
-        name: 'Niraj Raj',
+        name: 'Nirav Raj',
         regNo: '2022UGCE071',
         image: 'niraj_raj.jpg'
     },
