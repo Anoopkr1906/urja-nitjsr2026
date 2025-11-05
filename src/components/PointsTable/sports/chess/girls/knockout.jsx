@@ -1,6 +1,6 @@
 // src/components/PointsTable/sports/basketball/boys/knockout.js
 
-export const chessGirlsKnockout = {
+export const tableTennisGirlsKnockout = {
     rounds: [
         {
             name: "Final",
@@ -12,6 +12,7 @@ export const chessGirlsKnockout = {
             name: "Winner",
             matches: [
                 { id: "W1", team1: "Winner", team2: null, winner: "", score1: null, score2: null },
+                { id: 'F1', date: 'TBD', venue: 'TSG', team1: 'ECE+MME', score1: '', team2: 'CSE+ME', score2: '', winner: '' },
             ]
         }
     ]

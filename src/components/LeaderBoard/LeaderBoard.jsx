@@ -43,6 +43,45 @@ const teamsData = [
     totalPoints: 255,
     breakdown: { 'Athletics': 25, 'Badminton': 30, 'Basketball': 20, 'Chess': 3, 'Cricket': 2, 'Football': 40, 'Handball': 25, 'Hockey': 20, 'Table Tennis': 20, 'Volleyball': 25 }
   },
+    name: 'PIE',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
+  },
+  {
+    name: 'CSE',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
+  },
+  {
+    name: 'ECE',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
+  },
+  {
+    name: 'CE',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
+  },
+  {
+    name: 'MME',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
+  },
+  {
+    name: 'ME',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
+  },
+  {
+    name: 'EE',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
+  },
+  {
+    name: 'ECM',
+    totalPoints: 0,
+    breakdown: { 'Athletics': 0, 'Badminton': 0, 'Carrom': 0, 'Chess': 0, 'Cricket': 0, 'Football': 0, 'Table Tennis': 0, 'Volleyball': 0 }
+  }
 ];
 // ---------------------------
 
@@ -174,7 +213,7 @@ const LeaderBoard = () => {
 
         <div className="scoring-rules">
           <div className="scoring-title">SCORING SYSTEM</div>
-          <div>1st Place: 5 points • 2nd Place: 3 points • 3rd Place: 1 point</div>
+          <div>1st Place: 10 points • 2nd Place: 7 points • 3rd Place: 5 point</div>
           <div className="scoring-subtitle">
             Team trophies awarded based on total points from all events
           </div>
