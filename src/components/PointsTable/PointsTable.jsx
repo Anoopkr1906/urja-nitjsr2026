@@ -47,8 +47,8 @@ const sportsDataMap = {
     'Lawn Tennis': {
         genders: ['Boys', 'Girls'],
         pools: {
-            'Boys': ['Pool A','Pool B'],
-            'Girls': ['Pool A','Pool B']
+            'Boys': ['Pool A'],
+            'Girls': ['Pool A', 'Pool B']
         },
         stages: ['Group Stage', 'Knockout']
     },

@@ -7,11 +7,11 @@ export const badmintonGirlsKnockout = {
       matches: [
         {
           id: "F1",
-          date: "TBD",
-          venue: "LHC",
-          team1: "ME + PG",
-          score1: "",
-          team2: "MME + ECE",
+          date: "5 November",
+          venue: "Ups Badminton Court",
+          team1: "ECE+MME",
+          score1: "w/o",
+          team2: "ME + PG",
           score2: "",
           winner: "",
         },

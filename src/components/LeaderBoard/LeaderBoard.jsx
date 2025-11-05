@@ -1,146 +1,152 @@
 import React, { useState, useEffect } from "react";
 import "./LeaderBoard.css";
 
-// --- DATA REMAINS THE SAME ---
+// --- RAW DATA: totalPoints is now often 0 in the source, as it will be calculated ---
 const teamsData = [
   {
     name: "ECM+PIE",
-    totalPoints: 0,
+    totalPoints: 0, // Not Needed
     breakdown: {
       Athletics: 0,
       Badminton: 0,
-      Basketball: 0,
       Chess: 0,
       Cricket: 0,
       Football: 0,
-      Handball: 0,
-      Hockey: 0,
+      "Lawn Tennis": 0,
       "Table Tennis": 0,
       Volleyball: 0,
     },
   },
   {
     name: "CSE",
-    totalPoints: 0,
+    totalPoints: 0,// Not Needed
     breakdown: {
       Athletics: 0,
       Badminton: 0,
-      Basketball: 0,
       Chess: 0,
       Cricket: 0,
       Football: 0,
-      Handball: 0,
-      Hockey: 0,
+      "Lawn Tennis": 0,
       "Table Tennis": 0,
       Volleyball: 0,
     },
   },
   {
     name: "ECE",
-    totalPoints: 0,
+    totalPoints: 0, // Not Needed
     breakdown: {
       Athletics: 0,
-      Badminton: 0,
-      Basketball: 0,
+      Badminton: 7,
       Chess: 0,
       Cricket: 0,
       Football: 0,
-      Handball: 0,
-      Hockey: 0,
+      "Lawn Tennis": 0,
       "Table Tennis": 0,
       Volleyball: 0,
     },
   },
   {
-    name: "CIVIL",
-    totalPoints: 0,
+    name: "CE",
+    totalPoints: 0, // Not Needed
     breakdown: {
       Athletics: 0,
       Badminton: 0,
-      Basketball: 0,
       Chess: 0,
       Cricket: 0,
       Football: 0,
-      Handball: 0,
-      Hockey: 0,
+      "Lawn Tennis": 0,
       "Table Tennis": 0,
       Volleyball: 0,
     },
   },
   {
-    name: "META",
-    totalPoints: 0,
+    name: "MME",
+    totalPoints: 0, // Not Needed
     breakdown: {
       Athletics: 0,
       Badminton: 0,
-      Basketball: 0,
       Chess: 0,
       Cricket: 0,
       Football: 0,
-      Handball: 0,
-      Hockey: 0,
+      "Lawn Tennis": 0,
       "Table Tennis": 0,
       Volleyball: 0,
     },
   },
   {
-    name: "MECH",
-    totalPoints: 0,
+    name: "ME",
+    totalPoints: 0, // Not Needed
     breakdown: {
       Athletics: 0,
-      Badminton: 0,
-      Basketball: 0,
+      Badminton: 5,
       Chess: 0,
       Cricket: 0,
       Football: 0,
-      Handball: 0,
-      Hockey: 0,
+      "Lawn Tennis": 0,
       "Table Tennis": 0,
       Volleyball: 0,
     },
   },
   {
     name: "EE",
-    totalPoints: 0,
+    totalPoints: 0, // Not Needed
     breakdown: {
       Athletics: 0,
-      Badminton: 0,
-      Basketball: 0,
+      Badminton: 10,
       Chess: 0,
       Cricket: 0,
       Football: 0,
-      Handball: 0,
-      Hockey: 0,
+      "Lawn Tennis": 0,
       "Table Tennis": 0,
       Volleyball: 0,
     },
   },
   {
     name: "PG",
-    totalPoints: 0,
+    totalPoints: 0, // Not Needed
     breakdown: {
       Athletics: 0,
       Badminton: 0,
-      Basketball: 0,
       Chess: 0,
       Cricket: 0,
       Football: 0,
-      Handball: 0,
-      Hockey: 0,
+      "Lawn Tennis": 0,
       "Table Tennis": 0,
       Volleyball: 0,
     },
   },
 ];
 
+// --- NEW FUNCTION TO CALCULATE TOTAL POINTS ---
+const calculateTotalPoints = (data) => {
+  return data.map(team => {
+    // Calculate the sum of all points in the breakdown object
+    const calculatedTotalPoints = Object.values(team.breakdown).reduce(
+      (sum, points) => sum + points,
+      0
+    );
+    // Return a new team object with the calculated totalPoints
+    return {
+      ...team,
+      totalPoints: calculatedTotalPoints,
+    };
+  });
+};
+
 const LeaderBoard = () => {
   const [selectedTeam, setSelectedTeam] = useState(null);
 
-  const sortedTeams = [...teamsData].sort(
+  // 1. Calculate the totals first
+  const teamsWithCalculatedTotals = calculateTotalPoints(teamsData);
+
+  // 2. Sort the calculated totals
+  const sortedTeams = [...teamsWithCalculatedTotals].sort(
     (a, b) => b.totalPoints - a.totalPoints
   );
+
+  // Existing logic for podium and list separation
   const topThree = sortedTeams.slice(0, 3);
-  const rest = sortedTeams.slice(3);
+  const teamsBelowPodium = sortedTeams.slice(3);
 
   const podiumOrder = [topThree[1], topThree[0], topThree[2]].filter(Boolean);
 
@@ -176,7 +182,7 @@ const LeaderBoard = () => {
     return "";
   };
 
-  // ✅ Check if any of the top 3 teams have nonzero points
+  // Check if any of the top 3 teams have nonzero points
   const showPodium = topThree.some((team) => team.totalPoints > 0);
 
   return (
@@ -193,9 +199,8 @@ const LeaderBoard = () => {
               {Object.entries(selectedTeam.breakdown).map(([sport, points]) => (
                 <div
                   key={sport}
-                  className={`breakdown-item ${
-                    points === 0 ? "zero-points" : ""
-                  }`}
+                  className={`breakdown-item ${points === 0 ? "zero-points" : ""
+                    }`}
                 >
                   <span className="breakdown-sport">{sport}</span>
                   <span className="breakdown-points">{points}</span>
@@ -212,7 +217,7 @@ const LeaderBoard = () => {
           <div className="subtitle">URJA'26 • SPORTSFEST 2025</div>
         </div>
 
-        {/* ✅ Only show podium if any top 3 team has nonzero points */}
+        {/* Only show podium if any top 3 team has nonzero points */}
         {showPodium && (
           <div className="podium">
             {podiumOrder.map((team, index) => (
@@ -243,13 +248,12 @@ const LeaderBoard = () => {
           </div>
         )}
 
-        {/* ✅ Always show normal list of teams */}
         <div className="other-teams-section">
           <div className="other-teams-list">
-            {sortedTeams.map((team, index) => (
+            {teamsBelowPodium.map((team, index) => (
               <div key={team.name} className="list-item-wrapper">
                 <div className="list-item">
-                  <div className="list-rank">{index + 1}</div>
+                  <div className="list-rank">{index + 4}</div>
                   <div className="list-name">{team.name}</div>
                   <div className="list-points">{team.totalPoints}</div>
                   <button

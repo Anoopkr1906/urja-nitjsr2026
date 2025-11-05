@@ -5,14 +5,14 @@ export const badmintonBoysKnockout = {
         {
             name: "Semi-finals",
             matches: [
-                { id: 'SF1', date: '12 October', venue: 'LHC', team1: 'ECE', score1: '', team2: 'EE', score2: '', winner: '' },
-                { id: 'SF2', date: '12 October', venue: 'LHC', team1: 'CSE', score1: '', team2: 'PG', score2: '', winner: '' },
+                { id: 'SF1', date: '5 November', venue: 'Ups Badminton Court', team1: 'ECE', score1: '', team2: 'CSE', score2: '', winner: 'ECE' },
+                { id: 'SF2', date: '5 November', venue: 'Ups Badminton Court', team1: 'EE', score1: '', team2: 'ME', score2: '', winner: 'EE' },
             ]
         },
         {
             name: "Final",
             matches: [
-                { id: 'F1', date: 'TBD', venue: 'LHC', team1: 'Winner SF1', score1: '', score1_pen: '', team2: 'Winner SF2', score2: '', score2_pen: '', winner: '' }
+                { id: 'F1', date: '6 November', venue: 'Ups Badminton Court', team1: 'ECE', score1: '1', score1_pen: '', team2: 'EE', score2: '3', score2_pen: '', winner: 'EE' }
             ]
         }
     ],
@@ -20,7 +20,7 @@ export const badmintonBoysKnockout = {
     thirdPlace: {
         name: "Third Place",
         match: {
-            id: 'TP1', date: 'TBD', venue: 'LHC', team1: 'Loser SF1', score1: '', team2: 'Loser SF2', score2: '', winner: ''
+            id: 'TP1', date: '6 November', venue: 'Ups Badminton Court', team1: 'CSE', score1: '0', team2: 'ME', score2: '3', winner: 'ME'
         }
     }
 };
