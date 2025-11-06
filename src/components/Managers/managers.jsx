@@ -1,6 +1,6 @@
 import React from "react";
-import "./Managers.css";
-import { MANAGERS } from "../../data/managers"; // ✅ Ensure correct path
+import "./managers.css";
+import { MANAGERS } from "../../data/managers.jsx"; // ✅ Ensure correct path
 
 export default function Managers() {
   return (
