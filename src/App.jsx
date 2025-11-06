@@ -19,6 +19,7 @@ function ScrollToTop() {
   }, []);
   return null;
 }
+// Main App Component with Routing
 
 export default function App() {
   return (
