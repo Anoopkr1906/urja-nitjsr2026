@@ -243,13 +243,13 @@ export const athleticsJavelinThrow = {
     pointsTable: {
         headings: ['Position', 'Team', 'Points'],
         data: [
-            ['1', 'CSE', '1'],
+            ['1', 'CSE', '0'],
             ['2', 'ECE', '0'],
             ['3', 'EE', '0'],
             ['4', 'PIE+ECM', '0'],
             ['5', 'CE', '5'],
-            ['6', 'MME', '3'],
-            ['7', 'ME', '0'],
+            ['6', 'MME', '0'],
+            ['7', 'ME', '4'],
             ['8', 'PG', '0']
         ]
     }
