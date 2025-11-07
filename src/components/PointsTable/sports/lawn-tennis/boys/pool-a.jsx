@@ -2,10 +2,10 @@ export const lawnTennisBoysPoolA = {
     pointsTable: {
         headings: ['Player', 'Pld', 'W', 'L', 'Pts'],
         data: [
-            ['ME + PG', 3, 0, 0, 0],
-            ['CE + PIE + ECM', 3, 0, 0, 0],
-            ['ECE + MME', 3, 0, 0, 0],
-            ['EE + CSE', 3, 0, 0, 0],
+            ['ME + PG', 3, 1, 2, 2],
+            ['CE + PIE + ECM', 3, 2, 1, 4],
+            ['ECE + MME', 3, 2, 1, 4],
+            ['EE + CSE', 3, 0, 3, 0],
         ]
     },
     matches: [

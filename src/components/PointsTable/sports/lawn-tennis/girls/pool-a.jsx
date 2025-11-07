@@ -4,8 +4,8 @@ export const lawnTennisGirlsPoolA = {
     pointsTable: {
         headings: ['Team', 'Pld', 'W', 'L', 'Pts'],
         data: [
-            ['ME + PG', 1, 1, 0, 1],
-            ['CE + PIE + ECM', 1, 0, 1, 0],
+            ['ME + PG', 1, 0, 1, 0],
+            ['CE + PIE + ECM', 1, 1, 0, 2],
         ]
     },
     matches: [
